@@ -1,9 +1,10 @@
 import React from "react";
 import { styleReset } from "react95";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 /* Pick a theme of your choice */
 import original from "react95/dist/themes/original";
+import Upload from "./components/Upload";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -24,18 +25,11 @@ const GlobalStyles = createGlobalStyle`
   ${styleReset}
 `;
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  background: ${({ theme }) => theme.desktopBackground};
-`;
-
 const App = () => (
   <div>
     <GlobalStyles />
     <ThemeProvider theme={original}>
-      <Wrapper>
-        <p>hello</p>
-      </Wrapper>
+      <Upload />
     </ThemeProvider>
   </div>
 );
