@@ -4,7 +4,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 /* Pick a theme of your choice */
 import original from "react95/dist/themes/original";
-import Upload from "./components/Upload";
+import Main from "./components/Main";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -29,7 +29,7 @@ const App = () => (
   <div>
     <GlobalStyles />
     <ThemeProvider theme={original}>
-      <Upload />
+      <Main />
     </ThemeProvider>
   </div>
 );
