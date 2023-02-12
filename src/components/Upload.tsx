@@ -60,10 +60,19 @@ const Upload = () => {
     }
   }
 
-  function onFile(evt: React.BaseSyntheticEvent) {
+  function onFile(_: React.BaseSyntheticEvent) {
     if (uploadRef?.current?.files?.[0]) {
       setUploadDisabled(false);
       setFile(uploadRef?.current?.files?.[0]);
+    }
+  }
+
+  async function onRowAction(key: string) {
+    try {
+      const { url } = await get(`file/url?key=${key}`);
+      window.open(url);
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -81,7 +90,11 @@ const Upload = () => {
           <TableBody>
             {files.map((f) => {
               return (
-                <TableRow key={f.key}>
+                <TableRow
+                  key={f.key}
+                  onClick={() => onRowAction(f.key)}
+                  onTouchEnd={() => onRowAction(f.key)}
+                >
                   <TableDataCell style={{ textAlign: "center" }}>
                     {f.key}
                   </TableDataCell>
@@ -112,6 +125,7 @@ const Upload = () => {
           />
           <Button
             style={{ marginRight: "1%" }}
+            disabled={submitting}
             onClick={() => {
               if (uploadRef?.current) {
                 uploadRef.current.click();
@@ -121,19 +135,29 @@ const Upload = () => {
             Select file
           </Button>
           <Button
-            disabled={uploadDisabled}
+            disabled={submitting || uploadDisabled}
             style={{ marginRight: "0.5%" }}
             primary
             type="submit"
           >
             Upload
           </Button>
-          {submitting && <Hourglass />}
         </form>
         <div style={{ display: "flex", justifyContent: "right" }}>
           {!!file?.name && <p>{file.name}</p>}
         </div>
       </Window>
+      {submitting && (
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+          }}
+        >
+          <Hourglass />
+        </div>
+      )}
     </Wrapper>
   );
 };

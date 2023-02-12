@@ -49,7 +49,7 @@ const Main = () => {
                   <span role="img" aria-label="💾">
                     💾
                   </span>
-                  Code for this web app
+                  Frontend code
                 </MenuListItem>
                 <MenuListItem
                   onTouchEnd={() =>
@@ -62,7 +62,7 @@ const Main = () => {
                   <span role="img" aria-label="💽">
                     💽
                   </span>
-                  Code for Deno backend
+                  Deno backend code
                 </MenuListItem>
               </MenuList>
             )}
